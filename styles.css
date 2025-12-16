@@ -69,8 +69,8 @@ body {
 /* Header */
 .app-header {
     text-align: center;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-lg);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-xs);
     animation: fadeIn 0.8s ease-out;
 }
 
@@ -229,7 +229,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -246,7 +246,7 @@ body {
 /* 1. Decision Header - Optimized for Unity */
 .decision-header {
     text-align: center;
-    padding: var(--space-xl) 0 var(--space-md);
+    padding: var(--space-md) 0 var(--space-sm);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -311,7 +311,7 @@ body {
 .action-card {
     background: #FFFFFF;
     border-radius: 28px; /* Slightly more rounded for organic feel */
-    padding: 32px; /* Generous padding */
+    padding: 24px; /* Optimized padding */
     box-shadow: 
         0 4px 6px -1px rgba(0, 0, 0, 0.01), 
         0 12px 32px -4px rgba(59, 130, 246, 0.08); /* Colored shadow for premium feel */
@@ -451,21 +451,21 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: var(--space-md);
+    padding: var(--space-xs);
     background: linear-gradient(to top, rgba(248,250,252, 1) 70%, rgba(248,250,252, 0));
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-sm);
+    gap: 4px;
     z-index: 100;
-    padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+    padding-bottom: max(var(--space-xs), env(safe-area-inset-bottom));
 }
 
 .btn-primary {
     background-color: var(--text-primary);
     color: white;
     border: none;
-    padding: 18px 32px; /* Taller touch target */
+    padding: 16px 32px; /* Taller touch target */
     border-radius: 100px;
     font-size: 1.1rem;
     font-weight: 600;
@@ -509,7 +509,7 @@ body {
     color: var(--text-secondary);
     font-size: 0.9rem;
     cursor: pointer;
-    padding: var(--space-md); /* Larger hit area */
+    padding: var(--space-xs) var(--space-md); /* Larger hit area */
     opacity: 0.6;
 }
 

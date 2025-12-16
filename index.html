@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>今晚该不该吃？ - Should I Eat</title>
+    <meta name="description" content="帮你少做一次错误决定。">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Preload fonts if necessary, but we are using system stack mostly -->
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="logo">Should I Eat?</h1>
+            <p class="tagline">帮你少做一次错误决定。</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <!-- Main Content Area: Stepper Flow -->
+        <main id="main-content" class="main-content">
+            <!-- Steps will be injected here by JS -->
+        </main>
+
+        <!-- Result View (Hidden by default) -->
+        <section id="result-view" class="result-view hidden">
+            <!-- Result content will be injected here by JS -->
+        </section>
+
+        <!-- Footer / Legal -->
+        <footer class="app-footer">
+            <span class="privacy-note">不记录、不上传，只保存在本设备。</span>
+            <span class="disclaimer">仅作生活建议，不构成医疗建议。</span>
+            <button id="reset-btn" class="reset-link hidden">重置</button>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

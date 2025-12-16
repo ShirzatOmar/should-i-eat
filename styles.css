@@ -1,0 +1,537 @@
+:root {
+    /* Colors - Calm, Trust-First Palette */
+    --bg-color: #F8FAFC; /* Cool light gray, very neutral */
+    --card-bg: #FFFFFF;
+    --text-primary: #111827; /* Near black, softer */
+    --text-secondary: #6B7280; /* Cool gray */
+    --accent-color: #3B82F6; /* Calm, professional blue */
+    --accent-light: #EFF6FF; /* Very faint blue for backgrounds */
+    --accent-hover: #2563EB;
+    --border-color: #E5E7EB;
+    --border-hover: #D1D5DB;
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.05); /* Diffuse, premium shadow */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    
+    /* Spacing & Sizing - Generous Whitespace */
+    --radius-lg: 24px;   /* Modern app standard */
+    --radius-md: 16px;   /* For pills/buttons */
+    --radius-sm: 8px;
+    
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-xxl: 64px;
+    
+    /* Typography */
+    --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-weight-extra-bold: 800;
+
+    /* Mobile First Constants */
+    --min-touch-target: 56px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-stack);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.app-container {
+    width: 100%;
+    max-width: 480px; /* Constrained for mobile-like feel even on desktop */
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+    text-align: center;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    animation: fadeIn 0.8s ease-out;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-xs);
+    color: var(--text-primary);
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-regular);
+}
+
+/* Progress Bar - Mandatory & Visible */
+.progress-container {
+    width: 100%;
+    height: 6px; /* Slightly thicker for visibility */
+    background-color: #E2E8F0; /* Slightly darker for contrast */
+    border-radius: 3px;
+    margin-bottom: var(--space-xl);
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.progress-container.active {
+    opacity: 1;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--accent-color);
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 3px;
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: flex-start; /* Top-down flow */
+    padding-bottom: 100px; /* Space for fixed bottom CTA */
+}
+
+/* Input Cards - Mobile Optimized */
+.step-card {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+    transition: 
+        opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.step-card.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    position: relative;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.step-card.leaving {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    position: absolute;
+}
+
+.question-title {
+    font-size: 1.75rem; /* Larger for quick scanning */
+    font-weight: var(--font-weight-extra-bold);
+    margin-bottom: var(--space-xl);
+    text-align: left; /* Easier reading flow */
+    line-height: 1.2;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+}
+
+/* Options / Chips - Large Touch Targets */
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md); /* Increased gap */
+}
+
+.option-btn {
+    appearance: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg); /* Larger radius */
+    min-height: var(--min-touch-target); /* Minimum 56px height */
+    font-size: 1.1rem;
+    font-family: var(--font-stack);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    overflow: hidden;
+}
+
+.option-btn:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+.option-btn:active {
+    transform: scale(0.98);
+    background-color: var(--bg-color);
+}
+
+.option-btn.selected {
+    background-color: var(--accent-light);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    font-weight: var(--font-weight-medium);
+    box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+/* Arrow in option */
+.option-btn .arrow {
+    opacity: 0.5;
+    transform: translateX(0);
+    transition: all 0.3s ease;
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+.option-btn:hover .arrow,
+.option-btn.selected .arrow {
+    opacity: 1;
+    color: var(--accent-color);
+    transform: translateX(4px);
+}
+
+/* Result View - V1.1 Structure */
+.result-view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: none;
+    padding-bottom: 120px; /* Space for fixed bottom CTA */
+}
+
+.result-view.visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 1. Decision Header - Optimized for Unity */
+.decision-header {
+    text-align: center;
+    padding: var(--space-xl) 0 var(--space-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 0; /* Let elements control their own spacing closer */
+}
+
+.result-headline {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: var(--space-xs); /* Tight gap to one-liner */
+    color: var(--text-primary);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    z-index: 2;
+}
+
+.one-liner {
+    margin-top: 0;
+    font-style: italic;
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    font-family: Georgia, "Times New Roman", serif;
+    opacity: 1;
+    border: none;
+    padding: var(--space-sm) var(--space-xs);
+    line-height: 1.4;
+    text-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+    font-weight: 500;
+    position: relative;
+    display: block;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+}
+
+/* Quote decoration */
+.one-liner::before {
+    content: "“";
+    font-size: 3rem;
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    opacity: 0.2;
+    color: var(--accent-color);
+    font-family: sans-serif;
+}
+
+/* Connective element - The "Bridge" */
+.one-liner::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-light), transparent);
+    margin: var(--space-md) auto 0;
+    border-radius: 2px;
+}
+
+/* 2. Action Cards (Eat / Move) - Premium & Shareable */
+.action-card {
+    background: #FFFFFF;
+    border-radius: 28px; /* Slightly more rounded for organic feel */
+    padding: 32px; /* Generous padding */
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.01), 
+        0 12px 32px -4px rgba(59, 130, 246, 0.08); /* Colored shadow for premium feel */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* Subtle gradient overlay for depth */
+.action-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-light), var(--accent-color), var(--accent-light));
+    opacity: 0.6;
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+.action-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.card-title {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    letter-spacing: 0.1em;
+}
+
+.card-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.card-content li {
+    margin-bottom: var(--space-sm);
+    padding-left: 0;
+    display: flex;
+    align-items: flex-start;
+    font-size: 1.15rem; /* Slightly larger for readability */
+    line-height: 1.6;
+    color: var(--text-primary);
+    font-weight: 450;
+}
+
+.card-content li:last-child {
+    margin-bottom: 0;
+}
+
+/* Custom bullet */
+.card-content li::before {
+    content: "";
+    min-width: 6px;
+    height: 6px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    margin-top: 10px; /* Optical center alignment */
+    margin-right: 16px;
+    box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+/* 3. Why Section (De-emphasized) */
+.why-section {
+    padding: var(--space-md);
+    background: transparent;
+    border-radius: var(--radius-md);
+    margin-top: var(--space-sm);
+}
+
+.why-section .section-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-bottom: var(--space-sm);
+    display: block;
+    font-weight: 600;
+}
+
+.why-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-section li {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: var(--space-xs);
+    position: relative;
+    padding-left: var(--space-md);
+}
+
+.why-section li::before {
+    content: "info";
+    font-family: "Material Icons", sans-serif; /* Fallback if no icon font */
+    content: "i";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 0.7rem;
+    width: 16px;
+    height: 16px;
+    background: #E5E7EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-weight: bold;
+}
+
+/* 4. Bottom CTA (Fixed) */
+.bottom-cta-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-md);
+    background: linear-gradient(to top, rgba(248,250,252, 1) 70%, rgba(248,250,252, 0));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    z-index: 100;
+    padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+}
+
+.btn-primary {
+    background-color: var(--text-primary);
+    color: white;
+    border: none;
+    padding: 18px 32px; /* Taller touch target */
+    border-radius: 100px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 400px; /* Constrained width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-primary:active {
+    transform: scale(0.97);
+}
+
+/* Footer */
+.app-footer {
+    margin-top: auto;
+    text-align: center;
+    padding-top: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    padding-bottom: var(--space-xl); /* Extra padding for scrolling */
+}
+
+.hidden {
+    display: none !important;
+}
+
+.reset-link {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: var(--space-md); /* Larger hit area */
+    opacity: 0.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 480px) {
+    .app-container {
+        padding: var(--space-md);
+    }
+    .question-title {
+        font-size: 1.5rem;
+        margin-bottom: var(--space-lg);
+    }
+    .result-headline {
+        font-size: 2rem;
+    }
+    .option-btn {
+        padding: var(--space-md);
+    }
+}
